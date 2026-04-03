@@ -11,7 +11,7 @@ battery storage, hydrogen long-duration storage, inter-zonal transmission,
 and a CO2 emissions cap to study decarbonization pathways.
 """
 
-import os
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
@@ -21,14 +21,13 @@ import pypsa
 
 def build_network() -> pypsa.Network:
     """Build and return the ERCOT decarbonization network."""
-    np.random.seed(42)
+    rng = np.random.default_rng(42)
 
     # ---- Network and snapshots ----
     n = pypsa.Network(name="ERCOT-Decarbonization")
     snapshots = pd.date_range("2035-01-01", periods=2920, freq="3h")
     n.set_snapshots(snapshots)
 
-    hours = np.arange(len(snapshots))
     hour_of_day = snapshots.hour
     day_of_year = snapshots.dayofyear
 
@@ -54,7 +53,7 @@ def build_network() -> pypsa.Network:
         seasonal = 1 + 0.15 * np.sin(2 * np.pi * (day_of_year - 80) / 365)
         # Diurnal: peak in afternoon
         diurnal = 1 + 0.10 * np.sin(2 * np.pi * (hour_of_day - 6) / 24)
-        noise = 1 + 0.02 * np.random.randn(len(snapshots))
+        noise = 1 + 0.02 * rng.standard_normal(len(snapshots))
         load_profile = base * seasonal * diurnal * noise
         n.add("Load", f"{zone} load", bus=zone, p_set=load_profile)
 
@@ -119,7 +118,7 @@ def build_network() -> pypsa.Network:
     def wind_cf(mean: float = 0.35) -> np.ndarray:
         seasonal = 0.05 * np.cos(2 * np.pi * (day_of_year - 30) / 365)
         diurnal = 0.03 * np.sin(2 * np.pi * (hour_of_day - 3) / 24)
-        noise = 0.10 * np.random.randn(len(snapshots))
+        noise = 0.10 * rng.standard_normal(len(snapshots))
         cf = mean + seasonal + diurnal + noise
         return np.clip(cf, 0, 1)
 
@@ -130,7 +129,7 @@ def build_network() -> pypsa.Network:
         daytime = (hour_of_day >= 6) & (hour_of_day <= 18)
         bell = np.where(daytime, np.sin(np.clip(solar_angle, 0, np.pi)), 0.0)
         seasonal = 1 + 0.15 * np.sin(2 * np.pi * (day_of_year - 80) / 365)
-        noise = 1 + 0.05 * np.random.randn(len(snapshots))
+        noise = 1 + 0.05 * rng.standard_normal(len(snapshots))
         cf = mean_peak * bell * seasonal * noise
         return np.clip(cf, 0, 1)
 
@@ -287,9 +286,8 @@ if __name__ == "__main__":
     n = build_network()
 
     # Create output directory
-    os.makedirs(
-        "examples/networks/ercot-decarbonization/ercot-decarbonization",
-        exist_ok=True,
+    Path("examples/networks/ercot-decarbonization/ercot-decarbonization").mkdir(
+        parents=True, exist_ok=True
     )
 
     # Export in both formats
