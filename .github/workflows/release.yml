@@ -117,6 +117,10 @@ jobs:
         # stochastic-network
         n = pypsa.Network("examples/networks/stochastic-network/stochastic-network.nc")
         n.export_to_netcdf("examples/networks/stochastic-network/stochastic-network.nc")
+        # ercot-decarbonization
+        n = pypsa.Network("examples/networks/ercot-decarbonization/ercot-decarbonization")
+        n.export_to_csv_folder("examples/networks/ercot-decarbonization/ercot-decarbonization")
+        n.export_to_netcdf("examples/networks/ercot-decarbonization/ercot-decarbonization.nc")
       shell: python
 
     # End of preparation script

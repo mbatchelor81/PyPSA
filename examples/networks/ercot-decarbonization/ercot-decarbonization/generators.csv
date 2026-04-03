@@ -1,0 +1,11 @@
+name,bus,control,type,p_nom,p_nom_extendable,p_nom_max,carrier,marginal_cost,capital_cost,efficiency
+Houston gas CCGT,Houston,PQ,,8000.0,False,inf,natural_gas,35.0,0.0,0.55
+Houston coal,Houston,PQ,,3000.0,False,inf,coal,25.0,0.0,0.38
+North gas CCGT,North,PQ,,6000.0,False,inf,natural_gas,35.0,0.0,0.55
+North nuclear,North,PQ,,2400.0,False,inf,nuclear,9.0,0.0,0.33
+South gas CT,South,PQ,,4000.0,False,inf,natural_gas,55.0,0.0,0.35
+West gas CT,West,PQ,,2000.0,False,inf,natural_gas,55.0,0.0,0.35
+West onshore wind,West,PQ,,0.0,True,30000.0,onshore_wind,0.0,110000.0,1.0
+Houston solar,Houston,PQ,,0.0,True,50000.0,solar,0.0,75000.0,1.0
+South solar,South,PQ,,0.0,True,40000.0,solar,0.0,75000.0,1.0
+North onshore wind,North,PQ,,0.0,True,20000.0,onshore_wind,0.0,115000.0,1.0

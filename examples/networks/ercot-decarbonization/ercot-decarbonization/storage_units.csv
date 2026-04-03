@@ -1,0 +1,5 @@
+name,bus,control,type,p_nom_extendable,carrier,capital_cost,cyclic_state_of_charge,max_hours,efficiency_store,efficiency_dispatch
+Houston battery,Houston,PQ,,True,battery,150000.0,True,4.0,0.95,0.95
+North battery,North,PQ,,True,battery,150000.0,True,4.0,0.95,0.95
+South battery,South,PQ,,True,battery,150000.0,True,4.0,0.95,0.95
+West battery,West,PQ,,True,battery,150000.0,True,4.0,0.95,0.95

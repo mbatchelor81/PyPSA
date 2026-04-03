@@ -113,6 +113,7 @@ nav:
     - examples/modular-expansion.ipynb
     - examples/committable-extendable.ipynb
     - examples/modular-committable.ipynb
+    - examples/ercot-decarbonization.ipynb
   - Sector Coupling:
     - examples/sector-coupling-single-node.ipynb
     - examples/islanded-methanol-production.ipynb

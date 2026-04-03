@@ -264,3 +264,41 @@ def carbon_management() -> Network:
             "PyPSA."
         )
         raise RuntimeError(msg)
+
+
+def ercot_decarbonization() -> Network:
+    """Load the ERCOT decarbonization scenario example network.
+
+    <!-- md:badge-version v1.1.0 -->
+
+    A simplified 4-zone ERCOT-style US regional grid scenario targeting 80%
+    renewables by 2035 with carbon pricing. Demonstrates capacity expansion
+    planning with CO2 constraints, battery and hydrogen storage, and
+    inter-zonal transmission expansion.
+
+    Returns
+    -------
+    pypsa.Network
+        ERCOT decarbonization scenario network.
+
+    Examples
+    --------
+    >>> n = pypsa.examples.ercot_decarbonization()
+    >>> n
+    PyPSA Network 'ERCOT-Decarbonization'
+    --------------------------------------
+    Components:
+     - Bus: 5
+     - Carrier: 8
+     - Generator: 10
+     - GlobalConstraint: 1
+     - Link: 6
+     - Load: 4
+     - StorageUnit: 4
+     - Store: 1
+    Snapshots: 2920
+
+    """
+    return _retrieve_if_not_local(
+        "examples/networks/ercot-decarbonization/ercot-decarbonization.nc"
+    )
