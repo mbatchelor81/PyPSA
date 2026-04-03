@@ -1,0 +1,2 @@
+name,bus,type,carrier,e_nom_extendable,capital_cost,standing_loss
+Houston H2 store,Houston H2,,,True,10000.0,0.0001
