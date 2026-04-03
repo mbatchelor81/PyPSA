@@ -40,6 +40,12 @@ def test_carbon_management():
         pytest.skip("Test failed but converted to warning")
 
 
+def test_ercot_decarbonization():
+    n = pypsa.examples.ercot_decarbonization()
+    n.consistency_check()
+    assert not n.c.buses.static.empty
+
+
 def test_check_url_availability():
     """Test _check_url_availability function."""
     from pypsa.examples import _check_url_availability

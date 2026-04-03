@@ -599,6 +599,7 @@ def test_examples_against_master(tmp_path, example_network):
         "storage-hvdc",
         "scigrid-de",
         "model-energy",
+        "ercot-decarbonization",
     ],
 )
 def test_examples_consistency(tmp_path, example_network):
